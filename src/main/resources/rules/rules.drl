@@ -1,0 +1,25 @@
+package rules
+ 
+import com.dcpear.model.Counter
+ 
+rule "Counter shower 1" 
+    when $Counter  : Counter() 
+ then 
+    System.out.println("Counter there (1) : " + $Counter.count + " and the name is : " + $Counter.name);
+ end
+
+ rule "Counter shower 2" 
+when 
+    $Counter  : Counter()  
+    accumulate (Counter() ; $cnt : count())
+then 
+    System.out.println("Counter there (2) : " + $Counter.count + " and the name is : " + $Counter.name
+    +" accumaulated value is " +$cnt);
+end 
+
+rule "Counter shower 3" 
+when 
+    Counter()  
+then 
+System.out.println("Counters there (3) : ");
+end
